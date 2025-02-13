@@ -1,0 +1,81 @@
+.player {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+.player .card-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ddd;
+  padding: 0.5rem;
+}
+.player .card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1rem;
+}
+.player .card figure, .player .card .abilities {
+  grid-column: span 2;
+}
+.player .card figure {
+  margin: 0;
+  width: 25rem;
+  height: 15rem;
+}
+.player .card figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.player .card .name, .player .card .experience {
+  padding: 0 0.5rem;
+}
+.player .card .name {
+  justify-self: start;
+}
+.player .card .experience {
+  justify-self: end;
+}
+.player .card .abilities {
+  margin: 0;
+  padding: 1.625rem;
+  background-color: #ddd;
+}
+.player .card .abilities .ability {
+  background-color: #c6c5c5;
+  padding: 0.25rem;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+body #header {
+  text-align: center;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 0.625rem;
+  margin-bottom: 2rem;
+}
+body #container {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0 0;
+}
+body #fight {
+  background-color: rgb(243, 85, 85);
+  padding: 0.5rem 1rem;
+  font-size: larger;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+body #fight:active {
+  background-color: rgb(246.3626373626, 132.6373626374, 132.6373626374);
+}

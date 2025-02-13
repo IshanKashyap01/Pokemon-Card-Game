@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Game with fetch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <h1>Pokemon Game</h1>
+    </header>
+    <div style="display: flex; justify-content: center;">
+        <button id="fight">Fight</button>
+    </div>
+    <main id="container">
+        <!-- player1 -->
+        <article id="player1" class="player">
+            <section class="card-header">
+                <span class="player-name">John</span>
+                <span class="score">Score: 0</span>
+            </section>
+            <section class="card">
+                <figure>
+                    <img src="" alt="Pokemon">
+                </figure>
+                <span class="name"></span>
+                <span class="experience"></span>
+                <div class="abilities"></div>
+            </section>
+        </article>
+        <article id="player2" class="player">
+            <section class="card-header">
+                <span class="player-name">Alice</span>
+                <span class="score">Score: 0</span>
+            </section>
+            <!-- player2 -->
+            <section class="card">
+                <figure>
+                    <img src="" alt="Pokemon">
+                </figure>
+                <span class="name"></span>
+                <span class="experience"></span>
+                <div class="abilities"></div>
+            </section>
+        </article>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

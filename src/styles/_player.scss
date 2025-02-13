@@ -1,0 +1,62 @@
+.player
+{
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    .card-header
+    {
+        display: flex;
+        justify-content: space-between;
+        background-color: #ddd;
+        padding: 0.5rem;
+    }
+    .card
+    {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 1rem;
+        figure, .abilities
+        {
+            grid-column: span 2;
+        }
+        figure
+        {
+            margin: 0;
+            width: 25rem;
+            height: 15rem;
+            img
+            {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+        .name, .experience
+        {
+            padding: 0 0.5rem;
+        }
+        .name
+        {
+            justify-self: start;
+        }
+        .experience
+        {
+            justify-self: end;
+        }
+        .abilities
+        {
+            margin: 0;
+            padding: 1.625rem;
+            background-color: #ddd;
+            .ability
+            {
+                background-color: #c6c5c5;
+                padding: 0.25rem;
+            }
+        }
+    }
+}
