@@ -1,4 +1,7 @@
 @use 'player';
+@use 'sass:color';
+
+$orange: rgb(243, 85, 85);
 
 body 
 {
@@ -16,21 +19,24 @@ body
     }
     #container 
     {
-        display: flex;
-        justify-content: space-around;
-        margin: 1rem 0 0;
-    }
-    #fight
-    {
-        background-color: rgb(243, 85, 85);
-        padding: 0.5rem 1rem;
-        font-size: larger;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        &:active
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-content: space-evenly;
+        place-items: center;
+        gap: 1rem;
+        #fight
         {
-            background-color: lighten(rgb(243, 85, 85), 10%);
+            grid-column: span 2;
+            background-color: $orange;
+            padding: 0.5rem 1rem;
+            font-size: larger;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            &:active
+            {
+                background-color: color.adjust($orange, $lightness: 10%);
+            }
         }
     }
 }
