@@ -1,108 +1,12 @@
-/**
+import {Pokemon} from './modules/model/Pokemon.js'
+import { Player } from './modules/model/Player.js'
+/*
  * @description
  * API link for pokemon list: https://pokeapi.co/api/v2/pokemon/
  * This version loads pokemons as soon as the API fetches the list.
  * However, the pokemons are chosen at random from the same pool for both players
  * and not removed after use.
  */
-/**
- * Takes the pokemon object from API and extracts only the needed values
- * 
- * @description 
- * Following are the attributes and the way to access them for a pokemon in the current API:
- * - image: pokemon.sprites.other.dream_world.front_default
- * - name: pokemon.name
- * - experience: pokemon.base_experience
- * - abilities: pokemon.abilities[index].ability.name
- */
-class Pokemon 
-{
-    constructor(pokemon) 
-    {
-        this.img = pokemon['sprites']['other']['dream_world']['front_default']
-        this.name = pokemon['name']
-        this.experience = pokemon['base_experience']
-        this.abilities = pokemon['abilities'].map(obj => obj['ability']['name'])
-    }
-}
-/**
- * Model representation of a player
- */
-class Player
-{
-    #view
-    #pokemon
-    constructor(id)
-    {
-        this.id = id
-        this.score = 0
-        this.#view = new PlayerView(id)
-    }
-    set pokemon(pokemon)
-    {
-        this.#pokemon = pokemon
-        this.#view.renderPokemon(pokemon)
-    }
-    incrementScore()
-    {
-        this.#view.updateScore(++this.score)
-    }
-    get pokemon()
-    {
-        return this.#pokemon
-    }
-    isWinner(player)
-    {
-        return this.pokemon.experience > player.pokemon.experience
-    }
-    static getWinner(player1, player2)
-    {
-        return player1.isWinner(player2) ? player1 : player2
-    }
-}
-/**
- * Represents the Player card in the page
- */
-class PlayerView
-{
-    constructor(id)
-    {
-        this.playerContainer = document.querySelector(`#player${id}`)
-        this.img = this.playerContainer.querySelector('img')
-        this.scoreElement = this.playerContainer.querySelector('.score')
-        this.nameElement = this.playerContainer.querySelector('.name')
-        this.experienceElement = this.playerContainer.querySelector('.experience')
-        this.abilitiesContainer = this.playerContainer.querySelector('.abilities')
-    }
-    /**
-     * Renders a pokemon for the player
-     * @param {Pokemon} pokemon Pokemon to render
-     */
-    renderPokemon(pokemon)
-    {
-        this.img.src = pokemon.img
-        this.nameElement.textContent = pokemon.name
-        this.experienceElement.textContent = pokemon.experience
-        const abilityElements = pokemon.abilities.map((ability) => this.#createAbility(ability))
-        this.abilitiesContainer.replaceChildren(...abilityElements)
-    }
-    /**
-     * Creates an HTML element representing a pokemon ability
-     * @param {String} ability name of the ability
-     * @returns HTML element
-     */
-    #createAbility(ability)
-    {
-        const abilityElement = document.createElement('div')
-        abilityElement.classList.add('ability')
-        abilityElement.textContent = ability
-        return abilityElement
-    }
-    updateScore(score)
-    {
-        this.scoreElement.textContent = `Score: ${score}`
-    }
-}
 
 let pokemons, player1 = new Player(1), player2 = new Player(2)
 
@@ -147,25 +51,7 @@ async function loadPokemons(url)
  */
 async function getJSONFromServer(url)
 {
-    try
-    {
-        const response = await fetch(url)
-        const data = await handleAPIResponse(response)
-        return data
-    }
-    catch(error)
-    {
-        throw error
-    }
-}
-/**
- * Handles API response by either throwing an error (if applicable) or returns
- * a promise for the data
- * @param {Promise} response response from the `fetch()` API
- * @returns data from the API
- */
-function handleAPIResponse(response)
-{
+    const response = await fetch(url)
     if(!response.ok)
     {
         throw new Error(`Error ${response.status}: ${response.statusText}`)
