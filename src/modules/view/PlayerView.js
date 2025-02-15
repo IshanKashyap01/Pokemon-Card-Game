@@ -1,4 +1,4 @@
-import { Pokemon } from "./Pokemon.js"
+import { Pokemon } from "../model/Pokemon.js"
 /**
  * Represents the Player card in the page
  */

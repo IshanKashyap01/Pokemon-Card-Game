@@ -1,4 +1,4 @@
-import { PlayerView } from "./PlayerView.js"
+import { PlayerView } from "../view/PlayerView.js"
 /**
  * Model representation of a player
  */
