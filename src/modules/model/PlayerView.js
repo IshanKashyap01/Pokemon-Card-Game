@@ -1,3 +1,4 @@
+import { Pokemon } from "./Pokemon.js"
 /**
  * Represents the Player card in the page
  */
