@@ -55,10 +55,18 @@ export class Player
      * Compares the pokemon in hand of two players and returns the winner
      * @param {Player} player1 first player
      * @param {Player} player2 second player
-     * @returns Winner
+     * @returns Winner or null in case of draw
      */
     static getWinner(player1, player2)
     {
-        return player1.isWinner(player2) ? player1 : player2
+        if(player1.isWinner(player2))
+        {
+            return player1
+        }
+        if(player2.isWinner(player1))
+        {
+            return player2
+        }
+        return null
     }
 }

@@ -36,6 +36,7 @@ export class PokemonLoader
                     promise: this.loadPokemon(result['name'], result['url'])
                 }
             })
+            return this.#pokemons
         }
         catch(error)
         {
