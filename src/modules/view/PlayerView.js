@@ -39,6 +39,10 @@ export class PlayerView
         abilityElement.textContent = ability
         return abilityElement
     }
+    /**
+     * Updates the score of the player on the UI
+     * @param {Number} score number of wins of the player
+     */
     updateScore(score)
     {
         this.scoreElement.textContent = `Score: ${score}`

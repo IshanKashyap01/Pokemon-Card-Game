@@ -1,13 +1,26 @@
 import * as Util from '../util.js'
 import { Pokemon } from './Pokemon.js'
-
+/**
+ * link to the Pokemon API
+ */
 const API = 'https://pokeapi.co/api/v2/pokemon/'
-
+/**
+ * Fetches the Pokemons from the API
+ */
 export class PokemonLoader
 {
-    pokemons
     /**
-     * Loads all pokemons from the server into the `pokemons` global variable
+     * Array containing objects with a Pokémon's API URL and a promise that resolves to a `Pokemon` object.
+     * 
+     * @type {Array<{name: string, url: string, promise: Promise<Pokemon> }>}
+     */
+    #pokemons
+    constructor()
+    {
+        this.#pokemons = []
+    }
+    /**
+     * Loads all pokemons from a resource into the `pokemons` global variable
      * @param {String} url URL of the resource
      */
     async loadPokemons()
@@ -16,8 +29,9 @@ export class PokemonLoader
         {
             const data = await Util.getJSONFromServer(API)
             const results = data['results']
-            this.pokemons = results.map((result) => {
+            this.#pokemons = results.map((result) => {
                 return {
+                    name: result['name'],
                     url: result['url'], 
                     promise: this.loadPokemon(result['name'], result['url'])
                 }
@@ -44,5 +58,9 @@ export class PokemonLoader
         {
             throw new Error(`Couldn't load ${name} from ${url}`)
         }
+    }
+    get pokemons()
+    {
+        return this.#pokemons
     }
 }
