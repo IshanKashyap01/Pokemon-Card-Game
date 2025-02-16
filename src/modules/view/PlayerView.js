@@ -1,4 +1,3 @@
-import { Pokemon } from "../model/Pokemon.js"
 /**
  * Represents the Player card in the page
  */
@@ -15,14 +14,17 @@ export class PlayerView
     }
     /**
      * Renders a pokemon for the player
-     * @param {Pokemon} pokemon Pokemon to render
+     * @param {String} image link to the image
+     * @param {String} name name of the pokemon
+     * @param {Number} experience base experience
+     * @param  {...String} abilities all abilities of the pokemon
      */
-    renderPokemon(pokemon)
+    renderPokemon(image, name, experience, ...abilities)
     {
-        this.img.src = pokemon.img
-        this.nameElement.textContent = pokemon.name
-        this.experienceElement.textContent = pokemon.experience
-        const abilityElements = pokemon.abilities.map((ability) => this.#createAbility(ability))
+        this.img.src = image
+        this.nameElement.textContent = name
+        this.experienceElement.textContent = experience
+        const abilityElements = abilities.map((ability) => this.#createAbility(ability))
         this.abilitiesContainer.replaceChildren(...abilityElements)
     }
     /**

@@ -1,4 +1,4 @@
-import { PlayerView } from "../view/PlayerView.js"
+import { PlayerView } from '../view/PlayerView.js'
 /**
  * Model representation of a player
  */
@@ -15,7 +15,7 @@ export class Player
     set pokemon(pokemon)
     {
         this.#pokemon = pokemon
-        this.#view.renderPokemon(pokemon)
+        this.#view.renderPokemon(pokemon.image, pokemon.name, pokemon.experience, ...pokemon.abilities)
     }
     incrementScore()
     {
