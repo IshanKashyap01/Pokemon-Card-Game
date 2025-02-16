@@ -3,6 +3,10 @@
  */
 export class PlayerView
 {
+    /**
+     * 
+     * @param {Number} id ID of the player in the page
+     */
     constructor(id)
     {
         this.playerContainer = document.querySelector(`#player${id}`)
