@@ -23,8 +23,8 @@ export class GameEngine
     constructor()
     {
         this.#loader = new PokemonLoader()
-        this.#player1 = new PlayerController(1)
-        this.#player2 = new PlayerController(2)
+        this.#player1 = new PlayerController(1, true)
+        this.#player2 = new PlayerController(2, false)
     }
     /**
      * Fetches the pokemons from the API

@@ -16,11 +16,21 @@ export class PlayerController
     #player
     /**
      * @param {Number} id ID of the player's view
+     * @param {boolean} canRename `true` if the player can be renamed, `false`
+     * otherwise
      */
-    constructor(id)
+    constructor(id, canRename)
     {
         this.#player = new Player()
         this.#view = new PlayerView(id)
+        if(canRename)
+        {
+            this.#addRenameListeners()
+        }
+    }
+    get player()
+    {
+        return this.#player
     }
     /**
      * Changes the current pokemon selected by the player
@@ -39,8 +49,43 @@ export class PlayerController
         this.#player.incrementScore()
         this.#view.updateScore(this.#player.score)
     }
-    get player()
+    /**
+     * Adds event listeners to enable renaming
+     */
+    #addRenameListeners()
     {
-        return this.#player
+        this.#view.playerContainer
+            .querySelector('#rename')
+            .addEventListener('click',() => this.#makePlayerNameEditable())
+        this.#view.playerName.addEventListener('keydown', (event) => this.#enterHandler(event))
+        this.#view.playerName.addEventListener('blur', () => this.#saveName())
+    }
+    /**
+     * Allows renaming the player
+     */
+    #makePlayerNameEditable()
+    {
+        this.#view.playerName.setAttribute('contenteditable', true)
+        this.#view.playerName.textContent = ''
+        this.#view.playerName.focus()
+    }
+    /**
+     * Sets the name at the press of the enter key
+     * @param {Event} event event
+     */
+    #enterHandler(event)
+    {
+        if(event.key == 'Enter')
+        {
+            event.preventDefault()
+            this.#view.playerName.blur()
+        }
+    }
+    /**
+     * Saves the new name
+     */
+    #saveName()
+    {
+        this.#view.playerName.setAttribute('contenteditable', false)
     }
 }

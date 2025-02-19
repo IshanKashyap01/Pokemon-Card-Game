@@ -11,6 +11,7 @@ export class PlayerView
     {
         this.playerContainer = document.querySelector(`#player${id}`)
         this.img = this.playerContainer.querySelector('img')
+        this.playerName = this.playerContainer.querySelector('.player-name')
         this.scoreElement = this.playerContainer.querySelector('.score')
         this.nameElement = this.playerContainer.querySelector('.name')
         this.experienceElement = this.playerContainer.querySelector('.experience')
