@@ -5,41 +5,36 @@ import { Pokemon } from './Pokemon.js'
  */
 export class Player
 {
+    #score
     /**
      * GUI view of the player
      */
-    #view
-    /**
-     * Pokemon in hand
-     * @type Pokemon
-     */
     #pokemon
     /**
-     * Creates a new player with a 0 score and attaches its view on the page to
-     * it
-     * @param {Number} id ID of the player on the page
+     * Creates a new player with a 0 score
      */
-    constructor(id)
+    constructor()
     {
-        this.id = id
-        this.score = 0
-        this.#view = new PlayerView(id)
+        this.#score = 0
+    }
+    get score()
+    {
+        return this.#score
+    }
+    get pokemon()
+    {
+        return this.#pokemon
     }
     set pokemon(pokemon)
     {
         this.#pokemon = pokemon
-        this.#view.renderPokemon(pokemon.image, pokemon.name, pokemon.experience, ...pokemon.abilities)
     }
     /**
      * Increases the score by 1 and updates the view
      */
     incrementScore()
     {
-        this.#view.updateScore(++this.score)
-    }
-    get pokemon()
-    {
-        return this.#pokemon
+        this.#score++
     }
     /**
      * Compares the pokemon in hand of the player with an opponent to see if the
