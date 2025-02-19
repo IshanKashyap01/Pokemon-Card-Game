@@ -40,6 +40,13 @@ body #container #fight:active {
   flex-direction: column;
   place-self: baseline center;
 }
+.player #rename {
+  color: gray;
+  cursor: pointer;
+}
+.player #rename:active {
+  color: lightgray;
+}
 .player .card-header {
   display: flex;
   justify-content: space-between;

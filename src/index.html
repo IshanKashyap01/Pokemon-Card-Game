@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon Game with fetch</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/357de85382.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header id="header">
@@ -15,7 +16,10 @@
         <!-- player1 -->
         <article id="player1" class="player">
             <section class="card-header">
-                <span class="player-name">John</span>
+                <div>
+                    <span class="player-name">John</span>
+                    <i id="rename" class="fa-solid fa-pen"></i>
+                </div>
                 <span class="score">Score: 0 </span>
             </section>
             <section class="card">
@@ -30,7 +34,7 @@
         <!-- Player 2 -->
         <article id="player2" class="player">
             <section class="card-header">
-                <span class="player-name">Alice</span>
+                <span class="player-name">Computer</span>
                 <span class="score">Score: 0</span>
             </section>
             <section class="card">

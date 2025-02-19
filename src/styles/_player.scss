@@ -7,6 +7,16 @@
     display: flex;
     flex-direction: column;
     place-self: baseline center;
+    #rename
+    {
+        color: gray;
+        cursor: pointer;
+        // transition: color 0.2s ease;
+        &:active
+        {
+            color: lightgray
+        }
+    }
     .card-header
     {
         display: flex;
