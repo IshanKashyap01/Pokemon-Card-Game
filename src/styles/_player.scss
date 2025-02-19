@@ -6,6 +6,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    place-self: baseline center;
     .card-header
     {
         display: flex;
@@ -27,6 +28,7 @@
             margin: 0;
             width: 25rem;
             height: 15rem;
+            justify-self: center;
             img
             {
                 width: 100%;
@@ -57,5 +59,26 @@
                 padding: 0.25rem;
             }
         }
+    }
+}
+@media all and (max-width: 820px)
+{
+    .player
+    {
+        .card
+        {
+            figure
+            {
+                width: 35cqi;
+                height: 25cqb;
+            }
+        }
+    }
+}
+@media all and (max-width: 550px)
+{
+    .player
+    {
+        width: 48vw;
     }
 }
