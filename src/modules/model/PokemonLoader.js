@@ -10,24 +10,43 @@ const API = 'https://pokeapi.co/api/v2/pokemon/'
 export class PokemonLoader
 {
     /**
-     * Array containing objects with a Pokémon's API URL and a promise that resolves to a `Pokemon` object.
+     * Link to the previous batch of pokemons
+     */
+    #prev
+    /**
+     * Link to the current batch of pokemons
+     */
+    #curr
+    /**
+     * Link to the next batch of pokemons
+     */
+    #next
+    /**
+     * Array containing objects with a Pokemon's name, API URL and a promise
+     * that resolves to a `Pokemon` object.
      * 
-     * @type {Array<{name: string, url: string, promise: Promise<Pokemon> }>}
+     * @type {Array<{name: string, url: string, promise: Promise<Pokemon>}>}
      */
     #pokemons
     constructor()
     {
         this.#pokemons = []
+        this.#curr = API
+    }
+    get pokemons()
+    {
+        return this.#pokemons
     }
     /**
-     * Loads all pokemons from a resource into the `pokemons` global variable
-     * @param {String} url URL of the resource
+     * Loads all pokemons from the current API
      */
     async loadPokemons()
     {
         try
         {
-            const data = await Util.getJSONFromServer(API)
+            const data = await Util.getJSONFromServer(this.#curr)
+            this.#prev = data['previous']
+            this.#next = data['next']
             const results = data['results']
             this.#pokemons = results.map((result) => {
                 return {
@@ -47,6 +66,7 @@ export class PokemonLoader
      * Loads a pokemon from the API
      * @param {String} url URL of the pokemon's API
      * @returns `Promise` that fulfills into a `Pokemon`
+     * @throws `Error` with the name and url of the pokemon in the message
      */
     async loadPokemon(name, url)
     {
@@ -60,8 +80,30 @@ export class PokemonLoader
             throw new Error(`Couldn't load ${name} from ${url}`)
         }
     }
-    get pokemons()
+    /**
+     * Updates the API link to the next batch if there is on
+     * @returns `0` if there is a next batch, `-1` if not
+     */
+    setNextBatch()
     {
-        return this.#pokemons
+        if(this.#next)
+        {
+            this.#curr = this.#next
+            return 0
+        }
+        return -1
+    }
+    /**
+     * Updates the API link to the previous batch if there is one
+     * @returns `0` if there is a previous batch, `-1` if not
+     */
+    setPreviousBatch()
+    {
+        if(this.#prev)
+        {
+            this.#curr = this.#prev
+            return 0
+        }
+        return -1
     }
 }

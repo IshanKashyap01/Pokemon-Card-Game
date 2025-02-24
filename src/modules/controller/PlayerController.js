@@ -1,6 +1,6 @@
-import { Player } from "../model/Player.js"
-import { Pokemon } from "../model/Pokemon.js"
-import { PlayerView } from "../view/PlayerView.js"
+import { Player } from '../model/Player.js'
+import { Pokemon } from '../model/Pokemon.js'
+import { PlayerView } from '../view/PlayerView.js'
 /**
  * Keeps track of the player and updates the GUI
  */

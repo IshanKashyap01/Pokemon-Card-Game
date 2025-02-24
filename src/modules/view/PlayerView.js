@@ -1,5 +1,5 @@
 /**
- * Represents the Player card in the page
+ * Represents a Player card in the page
  */
 export class PlayerView
 {
