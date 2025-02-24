@@ -4,11 +4,6 @@
 export class Pokemon
 {
     /**
-     * Link to the image
-     * @type String
-     */
-    #image
-    /**
      * Name of the pokemon
      * @type String
      */
@@ -23,6 +18,11 @@ export class Pokemon
      * @type String[]
      */
     #abilities
+    /**
+     * Link to the image
+     * @type String
+     */
+    #image
     /**
      * Takes the pokemon object from API and extracts only the needed values
      * 

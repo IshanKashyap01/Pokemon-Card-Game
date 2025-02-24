@@ -15,14 +15,15 @@ export class PlayerController
      */
     #player
     /**
-     * @param {Number} id ID of the player's view
+     * @param {Player} player player to be managed
+     * @param {PlayerView} view player view to be managed
      * @param {boolean} canRename `true` if the player can be renamed, `false`
      * otherwise
      */
-    constructor(id, canRename)
+    constructor(player, view, canRename)
     {
-        this.#player = new Player()
-        this.#view = new PlayerView(id)
+        this.#player = player
+        this.#view = view
         if(canRename)
         {
             this.#addRenameListeners()

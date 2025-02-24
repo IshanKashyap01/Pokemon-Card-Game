@@ -2,6 +2,7 @@ import { PokemonLoader } from '../model/PokemonLoader.js'
 import {Player} from '../model/Player.js'
 import { logError } from '../util.js'
 import { PlayerController } from './PlayerController.js'
+import { PlayerView } from '../view/PlayerView.js'
 
 /**
  * Sets up and manages the game
@@ -13,18 +14,41 @@ export class GameEngine
      */
     #loader
     /**
-     * Controller for the first player
+     * The first player
      */
     #player1
     /**
-     * Controller for the second player
+     * The second player
      */
     #player2
+    /**
+     * View for the first player
+     */
+    #view1
+    /**
+     * View for the second player
+     */
+    #view2
+    /**
+     * Controller for the first player
+     */
+    #controller1
+    /**
+     * Controller for the second player
+     */
+    #controller2
+    /**
+     * Creates the players, loads the views and initialises the controllers
+     */
     constructor()
     {
+        this.#player1 = new Player()
+        this.#player2 = new Player()
+        this.#view1 = new PlayerView(1)
+        this.#view2 = new PlayerView(2)
         this.#loader = new PokemonLoader()
-        this.#player1 = new PlayerController(1, true)
-        this.#player2 = new PlayerController(2, false)
+        this.#controller1 = new PlayerController(this.#player1, this.#view1, true)
+        this.#controller2 = new PlayerController(this.#player2, this.#view2, false)
     }
     /**
      * Fetches the pokemons from the API
@@ -43,21 +67,17 @@ export class GameEngine
         let p2 = pokemons[Math.floor(Math.random() * (pokemons.length - 1))]
         Promise.all([p1.promise, p2.promise])
             .then((values) => {
-                this.#player1.changePokemon(values[0])
-                this.#player2.changePokemon(values[1])
-                const winner = Player.getWinner(this.#player1.player, this.#player2.player)
-                if(winner !== null)
+                this.#controller1.changePokemon(values[0])
+                this.#controller2.changePokemon(values[1])
+                if(this.#player1.isWinner(this.#player2))
                 {
-                    if(winner == this.#player1.player)
-                    {
-                        this.#player1.incrementScore()
-                    }
-                    else
-                    {
-                        this.#player2.incrementScore()
-                    }
+                    this.#controller1.incrementScore()
                 }
-                return [this.#player1.player.pokemon.name, this.#player2.player.pokemon.name]
+                else if(this.#player2.isWinner(this.#player1))
+                {
+                    this.#controller2.incrementScore()
+                }
+                return [this.#player1.pokemon.name, this.#player2.pokemon.name]
             })
             .then((pokemonNames) => console.log(`${pokemonNames}`))
             .catch(logError)
